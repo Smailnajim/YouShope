@@ -8,23 +8,28 @@
     <title>create</title>
 </head>
 <body>
-    @csrf
+    
     <form action="" method="post">
+        @csrf
+        
+
+
+
         <div class="mb-3">
             <label for="nameProduit" class="form-label">Name</label>
-            <input type="text" class="form-control" id="nameProduit" placeholder="Produit name">
+            <input type="text" class="form-control" id="nameProduit" placeholder="Produit name" name="name">
         </div>
         <div class="mb-3">
             <label for="prixProduit" class="form-label">Prix</label>
-            <input type="number" class="form-control" id="prixProduit" placeholder="Produit prix">
+            <input type="number" class="form-control" id="prixProduit" placeholder="Produit prix" name="prix">
         </div>
         <div class="mb-3">
             <label for="imageProduit" class="form-label">Image</label>
-            <input type="text" class="form-control" id="imageProduit" placeholder="Produit image">
+            <input type="text" class="form-control" id="imageProduit" placeholder="Produit image" name="imag">
         </div>
         <div class="mb-3">
             <label for="descriptionProduit" class="form-label">Description</label>
-            <textarea class="form-control" id="descriptionProduit" rows="3"></textarea>
+            <textarea class="form-control" id="descriptionProduit" rows="3"  name="description"></textarea>
         </div>
 
         <button type="submit">submit</button>

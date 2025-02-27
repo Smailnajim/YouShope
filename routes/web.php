@@ -19,8 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home', [UserController::class, 'index']);
-Route::get('/produit/create', [ProduitController::class, 'create']);
 Route::post('/produit/create', [ProduitController::class, 'store']);
+Route::get('/produit/create', [ProduitController::class, 'create']);
+Route::get('/produit/deatai/{id}', [ProduitController::class, 'readOne']);
 
 
 

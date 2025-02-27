@@ -12,4 +12,10 @@ class UserController extends Controller
         $produits = Produit::all();
         return view('visiter.home', ['produits'=>$produits]);
     }
+
+    public function all()
+    {
+        $posts = Produit::all();
+        return view('allusers', compact('posts'));
+    }
 }
