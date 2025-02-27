@@ -29,4 +29,22 @@ class ProduitController extends Controller
         $produit = Produit::find($id);
         return view('produit_deatai', compact('produit'));
     }
+
+    public function readAll(){
+        $produits = Produit::All();
+        return view('produits', compact('produits'));
+    }
+
+    public function deleteOne($id){
+        $produit = Produit::find($id);
+        if($produit){
+
+        }
+        $produit->delete();
+    }
+
+    public function deleteAll(){
+        Produit::truncate();
+    }
+
 }
