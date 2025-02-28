@@ -13,4 +13,8 @@ class Categori extends Model
         'id_categoris',
         'id_produits',
     ];
+
+    public function Produits(){
+        return $this->belongsToMany(Produit::class);
+    }
 }

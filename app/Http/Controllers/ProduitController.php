@@ -63,4 +63,14 @@ class ProduitController extends Controller
         $produit->save();
     }
 
+
+    public function categoris(){
+        return view();
+    }
+
+    public function addCategoris(array $ids, Integer $id_produit){
+
+        $product = Produit::find($id_produit);
+        $product->catigoris()->attach($ids);
+    }
 }

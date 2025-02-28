@@ -14,4 +14,8 @@ class Produit extends Model
         'description',
         'prix',
     ];
+
+    public function catigoris(){
+        return $this->belongsToMany(Categori::class);
+    }
 }
