@@ -9,6 +9,5 @@
 <body>
     
     <div> {{ $produit->name }}</div>
-    
 </body>
 </html>

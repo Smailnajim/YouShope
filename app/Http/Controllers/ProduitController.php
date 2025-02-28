@@ -47,4 +47,21 @@ class ProduitController extends Controller
         Produit::truncate();
     }
 
+    public function update(Produit $produit, array $update){
+
+        if(isset($update['prix']))
+            $produit->prix = $update['prix'];
+
+        if(isset($update['description']))
+            $produit->description = $update['description'];
+
+        if(isset($update['imag']))
+            $produit->imag = $update['imag'];
+
+        if(isset($update['name']))
+            $produit->name = $update['name'];
+
+        $produit->save();
+    }
+
 }
