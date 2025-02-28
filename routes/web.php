@@ -57,6 +57,24 @@ Route::get('/', function () {
 //|//  --- --- ---
 
 
+// // categoris_Produit--- --- ---
+/*|*/   // create--- C
+/*|*/   Route::post('/categori/create', [CategoriController::class, 'store']);
+/*|*/   Route::get('/categori/create', [CategoriController::class, 'create']);
+/*|*/   
+/*|*/   // read--- R
+/*|*/   Route::get('/categoris', [CategoriController::class, 'readAll']);
+/*|*/   Route::get('/categori/deatai/{id}', [CategoriController::class, 'readOne']);
+/*|*/   
+/*|*/   // update--- U
+/*|*/   Route::get('/categori/update/{id}', [CategoriController::class, 'update']);
+/*|*/   
+/*|*/      // delet--- D
+/*|*/    Route::get('/categoris/delete', [CategoriController::class, 'deleteAll']);
+/*|*/   Route::get('/categori/delete/{id}', [CategoriController::class, 'deleteOne']);
+//|//  --- --- ---
+
+
 
 
 
