@@ -3,37 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>create</title>
+    <title>Product Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
 </head>
 <body>
-    
-    <form action="" method="post">
-        @csrf
-        
-
-
-
-        <div class="mb-3">
-            <label for="nameProduit" class="form-label">Name</label>
-            <input type="text" class="form-control" id="nameProduit" placeholder="Produit name" name="name">
-        </div>
-        <div class="mb-3">
-            <label for="prixProduit" class="form-label">Prix</label>
-            <input type="number" class="form-control" id="prixProduit" placeholder="Produit prix" name="prix">
-        </div>
-        <div class="mb-3">
-            <label for="imageProduit" class="form-label">Image</label>
-            <input type="text" class="form-control" id="imageProduit" placeholder="Produit image" name="imag">
-        </div>
-        <div class="mb-3">
-            <label for="descriptionProduit" class="form-label">Description</label>
-            <textarea class="form-control" id="descriptionProduit" rows="3"  name="description"></textarea>
-        </div>
-
-        <button type="submit">submit</button>
-    </form>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <div class="form-container">
+        <h2>Product Form</h2>
+        <form action="" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="prix">Prix</label>
+                <input type="number" id="prix" name="prix" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="text" id="image" name="imag">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>

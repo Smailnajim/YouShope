@@ -9,7 +9,7 @@ use Ramsey\Uuid\Type\Integer;
 
 class ProduitController extends Controller
 {
-    public function create(Request $request){
+    public function create(){
         return view('create');
     }
     
