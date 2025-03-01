@@ -10,36 +10,38 @@ use Ramsey\Uuid\Type\Integer;
 class ProduitController extends Controller
 {
     public function create(){
-        return view('create');
+        return view('visiter.create');
     }
     
     public function store(Request $request){
         
         $request->validate([
-            'prix'=>'required',
-            'description'=>'required|max:255',
-            'imag'=>'required',
+            'prix'=>'required|gte:0',
+            'description'=>'required|max:265',
+            'imag'=>'required|max:265',
             'name'=>'required',
         ]);
-        Produit::create($request->all());
+        $produit = Produit::create($request->all());
+        if($produit->wasRecentlyCreated){
+            echo 'good!';
+        }
     }
 
     public function readOne($id){
         $produit = Produit::find($id);
-        return view('produit_deatai', compact('produit'));
+        return view('visiter.produit_deatai', compact('produit'));
     }
 
     public function readAll(){
         $produits = Produit::All();
-        return view('produits', compact('produits'));
+        return view('visiter.produits', compact('produits'));
     }
 
     public function deleteOne($id){
         $produit = Produit::find($id);
-        if($produit){
-
-        }
+            
         $produit->delete();
+        dd($produit);
     }
 
     public function deleteAll(){

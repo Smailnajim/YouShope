@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.navigation');
 });
 
 // // Produit--- --- ---
@@ -34,7 +34,7 @@ Route::get('/', function () {
 /*|*/   Route::get('/produit/update/{id}', [ProduitController::class, 'update']);
 /*|*/   
 /*|*/      // delet--- D
-/*|*/    Route::get('/produits/delete', [ProduitController::class, 'deleteAll']);
+/*|*/    Route::get('/produits/delete/all', [ProduitController::class, 'deleteAll']);
 /*|*/   Route::get('/produit/delete/{id}', [ProduitController::class, 'deleteOne']);
 //|//  --- --- ---
 

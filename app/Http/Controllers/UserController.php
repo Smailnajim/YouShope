@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index(){
         $produits = Produit::all();
-        return view('visiter.home', ['produits'=>$produits]);
+        return view('visiter.home', compact('produits'));
     }
 
     public function all()
