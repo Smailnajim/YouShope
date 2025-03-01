@@ -32,6 +32,11 @@ class ProduitController extends Controller
         return view('visiter.produit_deatai', compact('produit'));
     }
 
+    public function seveInSession($id){
+        $produit = Produit::find($id);
+        return view('visiter.produit_deatai', compact('produit'));
+    }
+
     public function readAll(){
         $produits = Produit::All();
         return view('visiter.produits', compact('produits'));

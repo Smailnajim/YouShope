@@ -18,7 +18,7 @@
                 <img src="{{ $produit->imag }}" class="card-img-top" alt="Product Image" style="width: 260px; height: 195px;">
                 <div class="card-body">
                     <h5 class="card-title">{{ $produit->name }}</h5>
-                    <a href="/produit/deatai/$produit->id" class="btn btn-primary">Show More</a>
+                    <a href="/produit/deatai/{{ $produit->id }}" class="btn btn-primary">Show More</a>
                 </div>
             </div>
             @endforeach

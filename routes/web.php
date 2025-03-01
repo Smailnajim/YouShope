@@ -29,6 +29,7 @@ Route::get('/', function () {
 /*|*/   Route::get('/home', [UserController::class, 'index']);
 /*|*/   Route::get('/produits', [ProduitController::class, 'readAll']);
 /*|*/   Route::get('/produit/deatai/{id}', [ProduitController::class, 'readOne']);
+/*|*/   Route::post('/produit/deatai/{id}', [ProduitController::class, 'seveInSession']);
 /*|*/   
 /*|*/   // update--- U
 /*|*/   Route::get('/produit/update/{id}', [ProduitController::class, 'update']);
