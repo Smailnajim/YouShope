@@ -57,6 +57,16 @@ Route::get('/', function () {
 //|//  --- --- ---
 
 
+// // categoris_Produit--- --- ---
+/*|*/   // create--- C
+/*|*/   Route::post('/produit/categori/add', [ProduitController::class, 'addCategoris']);
+/*|*/   
+/*|*/   // read--- R
+/*|*/   Route::get('/produit/categori/add', [ProduitController::class, 'categoris']);
+/*|*/   
+//|//  --- --- ---
+
+
 
 
 
