@@ -63,6 +63,7 @@ Route::get('/', function () {
 /*|*/   
 /*|*/   // read--- R
 /*|*/   Route::get('/produit/categori/add', [ProduitController::class, 'categoris']);
+/*|*/   
 //|//  --- --- ---
 
 
