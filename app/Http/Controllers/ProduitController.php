@@ -27,14 +27,29 @@ class ProduitController extends Controller
         }
     }
 
-    public function readOne($id){
+    public function readOne(int $id){
         $produit = Produit::find($id);
         return view('visiter.produit_deatai', compact('produit'));
     }
 
-    public function seveInSession($id){
-        $produit = Produit::find($id);
-        return view('visiter.produit_deatai', compact('produit'));
+
+    public function saveInSession(Request $request){
+        if($request->session()->has($request->name)){
+            return  back();
+        }
+        $nameproduit = 'produit_' . $request->name;
+        $request->session()->put($nameproduit, $request->id);
+
+        if(!$request->session()->has('paniy')){
+            $paniy = '';
+        }else{
+            $paniy = $request->session()->get('paniy');
+        }
+
+        $paniy = $paniy . '|' . $nameproduit;
+        $paniy = $request->session()->put('paniy', $paniy);
+
+        return ;
     }
 
     public function readAll(){
