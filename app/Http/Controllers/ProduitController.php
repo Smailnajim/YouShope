@@ -35,9 +35,12 @@ class ProduitController extends Controller
 
     public function saveInSession(Request $request){
         if($request->session()->has($request->name)){
-            return  back();
+            return  back()->with('alredyexist', 'alredy exist');
         }
         $nameproduit = 'produit_' . $request->name;
+        $numberitem = 'numberitem_' . $nameproduit;
+
+        $request->session()->put($numberitem, $request->numberitem);
         $request->session()->put($nameproduit, $request->id);
 
         if(!$request->session()->has('paniy')){
@@ -49,7 +52,7 @@ class ProduitController extends Controller
         $paniy = $paniy . '|' . $nameproduit;
         $paniy = $request->session()->put('paniy', $paniy);
 
-        return ;
+        return back()->with('addbygood', 'add to paniy succesfully');
     }
 
     public function readAll(){
