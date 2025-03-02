@@ -20,20 +20,34 @@
         <p class="card-text">{{ $produit->description }}</p>
         <h6 class="text-success">{{ $produit->prix }} $</h6>
 
-        <form action="" method="post">
+        <form action="" method="POST">
+            @csrf
+
+            <input type="hidden" name="_method" id="formthode" value="POST">
             <input type="hidden"  name="id" value="{{ $produit->id }}">
             <input type="hidden"  name="name" value="{{ $produit->name }}">
             
             <div class="hstack gap-3">
-                <input class="form-control me-auto" name="numberitem" type="number" placeholder="@if (session()->has('numberitem_produit_'. $produit->name )) {{ session()->get('numberitem_produit_'. $produit->name ) }} @else Add your item here... @endif " aria-label="Add your item here...">
+                <input class="form-control me-auto" name="numberitem" type="number" placeholder="@if (session()->has('numberitem_produit_'. $produit->name )) item in paniy: {{ session()->get('numberitem_produit_'. $produit->name ) }} @else Add your item here... @endif " aria-label="Add your item here...">
                 
                 @if (session()->has('produit_' .  $produit->name ))
-                    <button type="submit" class="btn btn-outline-danger">remove from paniy</button>
+                    <button onclick="methodForm('DELETE')" type="submit" class="btn btn-outline-danger">Remove</button>
                     <div class="vr"></div>
-                    <button class="btn btn-primary" type="submit">Update</button>
+                    <button onclick="methodForm('PUT')" class="btn btn-primary" type="submit">Update</button>
                 @else
-                    <button class="btn btn-primary" type="submit">Add to paniy</button>
-                @endif                
+                    <button class="btn btn-primary" type="submit">Add</button>
+                    @if (session()->has('alredyexist'))
+                        <div class="bd-callout bd-callout-info">
+                            <strong>{{ session()->get('alredyexist') }}</strong>
+                            Consider reading our guides for compiling with 
+                            <a href="/docs/5.3/getting-started/webpack/">Webpack</a>, 
+                            <a href="/docs/5.3/getting-started/parcel/">Parcel</a>, 
+                            or <a href="/docs/5.3/getting-started/vite/">Vite</a>. 
+                            We also have production-ready demos in 
+                            <a href="https://github.com/twbs/examples">our examples repository on GitHub</a>.
+                        </div>
+                    @endif
+                @endif
 
             </div>
         </form>

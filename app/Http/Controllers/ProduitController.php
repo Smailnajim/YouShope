@@ -33,13 +33,19 @@ class ProduitController extends Controller
     }
 
 
-    public function saveInSession(Request $request){
-        if($request->session()->has($request->name)){
-            return  back()->with('alredyexist', 'alredy exist');
-        }
+    public function seveInSession(Request $request){
+        $request->validate([
+            'numberitem'=>'required|gte:0',
+            'id'=>'required',
+            'name'=>'required',
+        ]);
+        
         $nameproduit = 'produit_' . $request->name;
         $numberitem = 'numberitem_' . $nameproduit;
 
+        if($request->session()->has($nameproduit)){
+            return  back()->with('alredyexist', 'alredy exist');
+        }
         $request->session()->put($numberitem, $request->numberitem);
         $request->session()->put($nameproduit, $request->id);
 

@@ -30,6 +30,8 @@ Route::get('/', function () {
 /*|*/   Route::get('/produits', [ProduitController::class, 'readAll']);
 /*|*/   Route::get('/produit/deatai/{id}', [ProduitController::class, 'readOne']);
 /*|*/   Route::post('/produit/deatai/{id}', [ProduitController::class, 'seveInSession']);
+/*|*/   Route::put('/produit/deatai/{id}', [ProduitController::class, 'seveInSession']);
+/*|*/   Route::delete('/produit/deatai/{id}', [ProduitController::class, 'seveInSession']);
 /*|*/   
 /*|*/   // update--- U
 /*|*/   Route::get('/produit/update/{id}', [ProduitController::class, 'update']);
