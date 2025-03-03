@@ -67,7 +67,6 @@ class ProduitController extends Controller
             'id'=>'required',
             'name'=>'required',
         ]);
-        
         $nameproduit = 'produit_' . $request->name;
         $numberitem = 'numberitem_' . $nameproduit;
 
