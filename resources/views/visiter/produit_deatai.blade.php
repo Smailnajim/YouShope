@@ -15,6 +15,17 @@
 <div class="position-relative">
     <div class="card position-relative top-50 mx-auto mt-5 ms-5" style="width: 60%; height: 80vh; margin-left: 25%;">
 
+        @if (session()->has('ERROR_GLOBAL'))
+            <div class="bd-callout bd-callout-info">
+                <strong>{{ session()->get('ERROR_GLOBAL') }}</strong>
+                Consider reading our guides for compiling with 
+                <a href="/docs/5.3/getting-started/webpack/">Webpack</a>, 
+                <a href="/docs/5.3/getting-started/parcel/">Parcel</a>, 
+                or <a href="/docs/5.3/getting-started/vite/">Vite</a>. 
+                We also have production-ready demos in 
+                <a href="https://github.com/twbs/examples">our examples repository on GitHub</a>.
+            </div>
+        @endif
         <img  src="{{ $produit->imag }}" class="card-img-top " alt="{{ $produit->name }}" style="width: 600px; height: 400px">
         <h5 class="card-title">{{ $produit->name }}</h5>
         <p class="card-text">{{ $produit->description }}</p>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Produit;
 
 use Illuminate\Http\Request;
@@ -32,6 +33,34 @@ class ProduitController extends Controller
         return view('visiter.produit_deatai', compact('produit'));
     }
 
+
+    public function updateitemProduct(Request $request){
+        $request->validate([
+            'numberitem'=>'required|gte:0',
+            'name'=>'required',
+        ]);
+        $nameProduit = 'numberitem_produit_' . $request->name;
+        $request->session()->put($nameProduit, $request->numberitem);
+    }
+
+    public function deleteitemProduct(Request $request){
+        $request->validate([
+
+            'numberitem'=>'required|gte:0',
+            'name'=>'required',
+        ]);
+
+        if (Str::contains($request->session()->get('paniy'), "|produit_".$request->name)) {
+            $paniy = $request->session()->get('paniy');
+            str_replace("|produit_" . $request->name, "", $paniy);
+            $request->session()->put('paniy');
+
+            
+            
+        } else {
+            return back()->with('ERROR_GLOBAL', 'This item not fonde in paniy');
+        }
+    }
 
     public function seveInSession(Request $request){
         $request->validate([
