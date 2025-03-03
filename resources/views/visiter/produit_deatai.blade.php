@@ -35,10 +35,11 @@
             <div class="hstack gap-3">
                 <input class="form-control me-auto" name="numberitem" type="number" placeholder="@if (session()->has('numberitem_produit_'. $produit->name )) item in paniy: {{ session()->get('numberitem_produit_'. $produit->name ) }} @else Add your item here... @endif " aria-label="Add your item here...">
                 
-                @if (session()->has('produit_' .  $produit->name ))
+                @if (session()->has('produit_' .  $produit->name))
                     <button onclick="methodForm('DELETE')" type="submit" class="btn btn-outline-danger">Remove</button>
                     <div class="vr"></div>
                     <button onclick="methodForm('PUT')" class="btn btn-primary" type="submit">Update</button>
+                    <p></p>
                 @else
                     <button class="btn btn-primary" type="submit">Add</button>
                     @if (session()->has('alredyexist'))

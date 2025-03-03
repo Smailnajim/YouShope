@@ -44,18 +44,27 @@ class ProduitController extends Controller
         return back()->with('successflly', 'Update by seccessflly');
     }
 
-    public function deleteitemProduct(Request $request){
+    public function deleteitemProduct(Request $request){    
         $request->validate([
             'name'=>'required',
         ]);
         $paniy = $request->session()->get('paniy');
-
+        
         if (Str::contains($paniy, "|produit_".$request->name)) {
-            $paniy = str_replace("|produit_" . $request->name, "", $paniy);
-            $request->session()->put('paniy',  $paniy);
-            $request->session()->forget('produit_' . $request->name);
-            $request->session()->forget('numberitem_produit_' . $request->name); 
-            return back()->with('successflly', 'Delete by seccessflly');
+            $paniy = Str::remove("|produit_" . $request->name, $paniy);
+            $request->session()->put('paniy', $paniy);
+            // $request->session()->forget('produit_' . $request->name);
+            // $request->session()->forget('numberitem_produit_' . $request->name);
+            request()->session()->forget('produit_' . $request->name);
+            request()->session()->forget('numberitem_produit_' . $request->name);
+            // die($request->session()->get('produit_' . $request->name ) );
+            // var_dump($paniy);
+            // dd($request->session()->get('paniy'));
+            if($request->session()->get('paniy') == "")
+            request()->session()->forget('paniy');
+            
+            return redirect()->route('paniypage');
+            // return back()->with('successflly', 'Delete by seccessflly');
         } else {
             return back()->with('ERROR_GLOBAL', 'This item not fonde in paniy');
         }
@@ -93,10 +102,8 @@ class ProduitController extends Controller
             session()->put('statpaniy', 'empty');
             return view('visiter.paniy');
         }
-        
         $paniy = session()->get('paniy');
         $pieces = explode("|", $paniy);
-        
         foreach($pieces as $piece){
             $arrayId []= session()->get($piece);
         }
@@ -115,7 +122,6 @@ class ProduitController extends Controller
         $produit = Produit::find($id);
             
         $produit->delete();
-        dd($produit);
     }
 
     public function deleteAll(){

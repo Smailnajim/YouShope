@@ -72,7 +72,7 @@ Route::get('/', function () {
 
 // // paniy --- --- --- 
 /*|*/   // read--- R
-/*|*/   Route::get('/panier', [ProduitController::class, 'allItemInpaniy']);
+/*|*/   Route::get('/panier', [ProduitController::class, 'allItemInpaniy'])->name('paniypage');
 /*|*/   
 //|//  --- --- ---
 
