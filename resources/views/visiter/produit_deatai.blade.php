@@ -18,12 +18,6 @@
         @if (session()->has('ERROR_GLOBAL'))
             <div class="bd-callout bd-callout-info">
                 <strong>{{ session()->get('ERROR_GLOBAL') }}</strong>
-                Consider reading our guides for compiling with 
-                <a href="/docs/5.3/getting-started/webpack/">Webpack</a>, 
-                <a href="/docs/5.3/getting-started/parcel/">Parcel</a>, 
-                or <a href="/docs/5.3/getting-started/vite/">Vite</a>. 
-                We also have production-ready demos in 
-                <a href="https://github.com/twbs/examples">our examples repository on GitHub</a>.
             </div>
         @endif
         <img  src="{{ $produit->imag }}" class="card-img-top " alt="{{ $produit->name }}" style="width: 600px; height: 400px">
@@ -50,17 +44,17 @@
                     @if (session()->has('alredyexist'))
                         <div class="bd-callout bd-callout-info">
                             <strong>{{ session()->get('alredyexist') }}</strong>
-                            Consider reading our guides for compiling with 
-                            <a href="/docs/5.3/getting-started/webpack/">Webpack</a>, 
-                            <a href="/docs/5.3/getting-started/parcel/">Parcel</a>, 
-                            or <a href="/docs/5.3/getting-started/vite/">Vite</a>. 
-                            We also have production-ready demos in 
-                            <a href="https://github.com/twbs/examples">our examples repository on GitHub</a>.
                         </div>
                     @endif
                 @endif
 
             </div>
+
+            @if (session()->has('successflly'))
+                <div class="bd-callout bd-callout-info">
+                    <strong>{{ session()->get('successflly') }}</strong>
+                </div>
+            @endif
         </form>
     </div>
 </div>

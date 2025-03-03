@@ -41,22 +41,21 @@ class ProduitController extends Controller
         ]);
         $nameProduit = 'numberitem_produit_' . $request->name;
         $request->session()->put($nameProduit, $request->numberitem);
+        return back()->with('successflly', 'Update by seccessflly');
     }
 
     public function deleteitemProduct(Request $request){
         $request->validate([
-
-            'numberitem'=>'required|gte:0',
             'name'=>'required',
         ]);
+        $paniy = $request->session()->get('paniy');
 
-        if (Str::contains($request->session()->get('paniy'), "|produit_".$request->name)) {
-            $paniy = $request->session()->get('paniy');
-            str_replace("|produit_" . $request->name, "", $paniy);
-            $request->session()->put('paniy');
-
-            
-            
+        if (Str::contains($paniy, "|produit_".$request->name)) {
+            $paniy = str_replace("|produit_" . $request->name, "", $paniy);
+            $request->session()->put('paniy',  $paniy);
+            $request->session()->forget('produit_' . $request->name);
+            $request->session()->forget('numberitem_produit_' . $request->name); 
+            return back()->with('successflly', 'Delete by seccessflly');
         } else {
             return back()->with('ERROR_GLOBAL', 'This item not fonde in paniy');
         }
@@ -88,6 +87,24 @@ class ProduitController extends Controller
         $paniy = $request->session()->put('paniy', $paniy);
 
         return back()->with('addbygood', 'add to paniy succesfully');
+    }
+
+    public function allItemInpaniy(){
+        if (!session()->has('paniy')) {
+            session()->put('statpaniy', 'empty');
+            return view('visiter.paniy');
+        }
+        
+        $paniy = session()->get('paniy');
+        $pieces = explode("|", $paniy);
+        
+        foreach($pieces as $piece){
+            $arrayId []= session()->get($piece);
+        }
+        $produits = Produit::whereIn('id',$arrayId)->get();
+        session()->forget('statpaniy');
+        return view('visiter.paniy', compact('produits'));
+
     }
 
     public function readAll(){

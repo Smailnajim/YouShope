@@ -36,8 +36,8 @@ Route::get('/', function () {
 /*|*/   // update--- U
 /*|*/   Route::get('/produit/update/{id}', [ProduitController::class, 'update']);
 /*|*/   
-/*|*/      // delet--- D
-/*|*/    Route::get('/produits/delete/all', [ProduitController::class, 'deleteAll']);
+/*|*/   // delet--- D
+/*|*/   Route::get('/produits/delete/all', [ProduitController::class, 'deleteAll']);
 /*|*/   Route::get('/produit/delete/{id}', [ProduitController::class, 'deleteOne']);
 //|//  --- --- ---
 
@@ -70,6 +70,11 @@ Route::get('/', function () {
 //|//  --- --- ---
 
 
+// // paniy --- --- --- 
+/*|*/   // read--- R
+/*|*/   Route::get('/panier', [ProduitController::class, 'allItemInpaniy']);
+/*|*/   
+//|//  --- --- ---
 
 
 
