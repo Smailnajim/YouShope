@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use App\Models\Produit;
-
+use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Integer;
 
@@ -24,7 +24,7 @@ class ProduitController extends Controller
         ]);
         $produit = Produit::create($request->all());
         if($produit->wasRecentlyCreated){
-            echo 'good!';
+            return back();
         }
     }
 
@@ -122,37 +122,43 @@ class ProduitController extends Controller
         $produit = Produit::find($id);
             
         $produit->delete();
+        return redirect(route('home'));
     }
 
     public function deleteAll(){
         Produit::truncate();
     }
 
-    public function update(Produit $produit, array $update){
+    public function update(Request $request){
+        $produit = Produit::find($request->id);
 
-        if(isset($update['prix']))
-            $produit->prix = $update['prix'];
+        if(isset($request->name))
+        $produit->name = $request->name;
 
-        if(isset($update['description']))
-            $produit->description = $update['description'];
+        if(isset($request->imag))
+        $produit->imag = $request->imag;
 
-        if(isset($update['imag']))
-            $produit->imag = $update['imag'];
+        if(isset($request->description))
+        $produit->description = $request->description;
 
-        if(isset($update['name']))
-            $produit->name = $update['name'];
+        if(isset($request->prix))
+        $produit->prix = $request->prix;
 
         $produit->save();
     }
 
+    public function updateDetai($id){
+        $produit = Produit::find($id);
+        return View('updaitp', compact($produit));
+    }
 
     public function categoris(){
         return view();
     }
 
-    public function addCategoris(array $ids, Integer $id_produit){
-
-        $product = Produit::find($id_produit);
-        $product->catigoris()->attach($ids);
+    public function addCategoris(){
+        
+        $product = Produit::find(4);
+        $product->catigoris()->attach([4, 5, 8]);
     }
 }

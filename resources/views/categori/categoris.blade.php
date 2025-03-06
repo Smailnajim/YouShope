@@ -10,6 +10,7 @@
     @foreach ($categoris as $categori)
     <div>
         {{ $categori->name }}
+        <a href="/categori/delete/{{ $categori->id }}" class="btn btn-primary" type="submit">delete this</a>
     </div>
     @endforeach
 </body>

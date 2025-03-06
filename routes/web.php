@@ -17,16 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.navigation');
+    return redirect(route('home'));
+});
+Route::get('/dashboard', function () {
+    return redirect(route('home'));
 });
 
 // // Produit--- --- ---
 /*|*/   // create--- C
 /*|*/   Route::post('/produit/create', [ProduitController::class, 'store']);
-/*|*/   Route::get('/produit/create', [ProduitController::class, 'create']);
+/*|*/   Route::get('/produit/create', [ProduitController::class, 'create']);    
 /*|*/   
 /*|*/   // read--- R
-/*|*/   Route::get('/home', [UserController::class, 'index']);
+/*|*/   Route::get('/home', [UserController::class, 'index'])->name('home');
 /*|*/   Route::get('/produits', [ProduitController::class, 'readAll']);
 /*|*/   Route::get('/produit/deatai/{id}', [ProduitController::class, 'readOne']);
 /*|*/   Route::post('/produit/deatai/{id}', [ProduitController::class, 'seveInSession']);
@@ -34,7 +37,8 @@ Route::get('/', function () {
 /*|*/   Route::delete('/produit/deatai/{id}', [ProduitController::class, 'deleteitemProduct']);
 /*|*/   
 /*|*/   // update--- U
-/*|*/   Route::get('/produit/update/{id}', [ProduitController::class, 'update']);
+/*|*/   Route::get('/produit/update/{id}', [ProduitController::class, 'updateDetai']);
+/*|*/   Route::post('/produit/update/{id}', [ProduitController::class, 'update']);
 /*|*/   
 /*|*/   // delet--- D
 /*|*/   Route::get('/produits/delete/all', [ProduitController::class, 'deleteAll']);
@@ -54,8 +58,8 @@ Route::get('/', function () {
 /*|*/   // update--- U
 /*|*/   Route::get('/categori/update/{id}', [CategoriController::class, 'update']);
 /*|*/   
-/*|*/      // delet--- D
-/*|*/    Route::get('/categoris/delete', [CategoriController::class, 'deleteAll']);
+/*|*/   // delet--- D
+/*|*/   Route::get('/categoris/delete', [CategoriController::class, 'deleteAll']);
 /*|*/   Route::get('/categori/delete/{id}', [CategoriController::class, 'deleteOne']);
 //|//  --- --- ---
 
@@ -77,12 +81,12 @@ Route::get('/', function () {
 //|//  --- --- ---
 
 
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/produit/create', [ProduitController::class, 'create'])->name('admin.dashboard');
+});
 
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

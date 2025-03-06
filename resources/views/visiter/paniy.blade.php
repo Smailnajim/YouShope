@@ -2,37 +2,41 @@
 
 @section('titel', 'paniy')
 
-@section('nav')
-    <nav class="navbar bg-primary" data-bs-theme="dark">
-        <a href="/home" class="btn">Home</a>
-        <a href="/login" class="btn">Login</a>
-        <a href="/register" class="btn">Register</a>
-        <a href="/panier" class="btn"><i class="fa-solid fa-store"></i></a>
-    </nav>
-@endsection
 
 @section('countent')
     @if (session()->has('statpaniy'))
-        <div class="position-absolute top-50 start-50 translate-middle" style="width: 70vw">
+        <div class="position-absolute top-50 start-50 translate-middle" style="width: 40vw">
             <span class="placeholder col-6"></span>
             <span class="placeholder w-75"></span>
             <span class="placeholder" style="width: 25%;"></span>
         </div>
-        
-
     @else
-        <div class="container overflow-hidden text-center mt-5">
-            <div class="row gy-5">     
-                @foreach ($produits as $produit)
-                <div class="card" style="width: 18rem;">
-                    <img src="{{ $produit->imag }}" class="card-img-top" alt="Product Image" style="width: 260px; height: 195px;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $produit->name }}</h5>
-                        <a href="/produit/deatai/{{ $produit->id }}" class="btn btn-primary">Show More</a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
+    <div style="position: relative;top: 25%" class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+        <h2 class="text-xl font-semibold mb-4">
+            paniy
+        </h2>
+                            <div class="space-y-4">
+                                @foreach ($produits as $produit)
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <img alt="Profile picture of Sophie B." class="w-12 h-12 rounded-full" height="50"
+                                                src="{{ $produit->imag }}"
+                                                width="50" />
+                                            <div>
+                                                <p class="font-semibold">
+                                                    {{ $produit->name }}
+                                                </p>
+                                                <p class="text-gray-500">
+                                                    {{ $produit->prix }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <a class="text-orange-500 font-semibold" href="/produit/deatai/{{ $produit->id }}">
+                                            More
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+        
     @endif
 @endsection
