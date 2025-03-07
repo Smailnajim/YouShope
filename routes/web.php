@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoriController;
 use \App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,7 @@ Route::get('/dashboard', function () {
 /*|*/   Route::get('/home', [UserController::class, 'index'])->name('home');
 /*|*/   Route::get('/produits', [ProduitController::class, 'readAll']);
 /*|*/   Route::get('/produit/deatai/{id}', [ProduitController::class, 'readOne']);
-/*|*/   Route::post('/produit/deatai/{id}', [ProduitController::class, 'seveInSession']);
+/*|*/   Route::post('/produit/deatai/{id}', [ProduitController::class, 'seveInSession'])->name('savesesion');
 /*|*/   Route::put('/produit/deatai/{id}', [ProduitController::class, 'updateitemProduct']);
 /*|*/   Route::delete('/produit/deatai/{id}', [ProduitController::class, 'deleteitemProduct']);
 /*|*/   
@@ -66,10 +67,10 @@ Route::get('/dashboard', function () {
 
 // // categoris_Produit--- --- ---
 /*|*/   // create--- C
-/*|*/   Route::post('/produit/categori/add', [ProduitController::class, 'addCategoris']);
+/*|*/   Route::get('/produit/categori/add', [ProduitController::class, 'addCategoris']);
 /*|*/   
 /*|*/   // read--- R
-/*|*/   Route::get('/produit/categori/add', [ProduitController::class, 'categoris']);
+// /*|*/   Route::get('/produit/categori/add', [ProduitController::class, 'categoris']);
 /*|*/   
 //|//  --- --- ---
 
@@ -77,6 +78,12 @@ Route::get('/dashboard', function () {
 // // paniy --- --- --- 
 /*|*/   // read--- R
 /*|*/   Route::get('/panier', [ProduitController::class, 'allItemInpaniy'])->name('paniypage');
+/*|*/   
+//|//  --- --- ---
+
+// // Order --- --- --- 
+/*|*/   // read--- R
+/*|*/   Route::get('/orders', [OrderController::class, 'allItemInpaniy'])->name('paniypage');
 /*|*/   
 //|//  --- --- ---
 

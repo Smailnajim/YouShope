@@ -29,7 +29,7 @@
                     
                     <div class="hstack gap-3">
                         <input class="form-control me-auto" name="numberitem" type="number" placeholder="@if (session()->has('numberitem_produit_'. $produit->name )) item in paniy: {{ session()->get('numberitem_produit_'. $produit->name ) }} @else Add your item here... @endif " aria-label="Add your item here...">
-                        
+
                     </div><br>
                     @if (session()->has('produit_' .  $produit->name))
                         <button onclick="methodForm('DELETE')" type="submit" class="btn btn-outline-danger">Remove</button>

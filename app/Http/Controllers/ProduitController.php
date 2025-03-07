@@ -71,8 +71,11 @@ class ProduitController extends Controller
     }
 
     public function seveInSession(Request $request){
+        if (!isset($request->numberitem) || $request->numberitem < 0){
+            $nnumberitem = 1;
+        }
+
         $request->validate([
-            'numberitem'=>'required|gte:0',
             'id'=>'required',
             'name'=>'required',
         ]);
@@ -82,7 +85,7 @@ class ProduitController extends Controller
         if($request->session()->has($nameproduit)){
             return  back()->with('alredyexist', 'alredy exist');
         }
-        $request->session()->put($numberitem, $request->numberitem);
+        $request->session()->put($numberitem, $nnumberitem);
         $request->session()->put($nameproduit, $request->id);
 
         if(!$request->session()->has('paniy')){
@@ -156,9 +159,9 @@ class ProduitController extends Controller
         return view();
     }
 
-    public function addCategoris(){
+    public function addCategoris(Request $request){
         
-        $product = Produit::find(4);
-        $product->catigoris()->attach([4, 5, 8]);
+        $product = Produit::find($request->produit_id);
+        $product->catigoris()->attach($request->categoris);
     }
 }

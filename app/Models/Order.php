@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'prix_order',
+        'number_items',
+        'status',
+    ];
+    
+
+    public function products(){
+        return $this->belongsToMany(Produit::class, 'order_produit')->withPivot('prix_total_produit', 'number_items_produit');
+    }
 }

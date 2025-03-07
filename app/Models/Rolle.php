@@ -12,4 +12,8 @@ class Rolle extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function rolle(){
+        return $this->belongsTo(User::class);
+    }
 }

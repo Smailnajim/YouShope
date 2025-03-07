@@ -16,6 +16,10 @@ class Produit extends Model
     ];
 
     public function catigoris(){
-        return $this->belongsToMany(Categori::class);
+        return $this->belongsToMany(Categori::class, 'categori_produit');
+    }
+
+    public function orders(){
+        return $this->belongsToMany(Order::class, 'order_produit');
     }
 }

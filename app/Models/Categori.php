@@ -15,6 +15,6 @@ class Categori extends Model
     ];
 
     public function Produits(){
-        return $this->belongsToMany(Produit::class);
+        return $this->belongsToMany(Produit::class, 'categori_produit');
     }
 }
