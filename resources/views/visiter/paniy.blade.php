@@ -16,6 +16,10 @@
             paniy
         </h2>
                             <div class="space-y-4">
+                                <div>
+                                    <p>prix total : {{ session()->get('prixorder') }} Dh</p>
+                                    <p>number produit :{{ session()->get('numberproduit') }}</p>
+                                </div>
                                 @foreach ($produits as $produit)
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-4">

@@ -83,7 +83,7 @@ Route::get('/dashboard', function () {
 
 // // Order --- --- --- 
 /*|*/   // read--- R
-/*|*/   Route::get('/orders', [OrderController::class, 'allItemInpaniy'])->name('paniypage');
+/*|*/   Route::get('/orders', [OrderController::class, 'allOrders']);
 /*|*/   
 //|//  --- --- ---
 

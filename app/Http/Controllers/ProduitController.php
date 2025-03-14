@@ -38,8 +38,19 @@ class ProduitController extends Controller
         $request->validate([
             'numberitem'=>'required|gte:0',
             'name'=>'required',
+            'prix'=>'required',
         ]);
+        $prixproduit = $request->numberitem * $request->prix;
+        // before update numberitem_produit_ in session we get last item for update orser item and then add new item to order and 
         $nameProduit = 'numberitem_produit_' . $request->name;
+        $items = $request->session()->get($nameProduit);
+        $lastprix = $items * $request->prix;
+        if($request->session()->has('prixorder')){
+            $prixorder = $request->session()->get('prixorder');
+        }
+        $prixorder -= $lastprix;
+        $prixorder += $prixproduit;
+        $request->session()->put('prixorder', $prixorder);
         $request->session()->put($nameProduit, $request->numberitem);
         return back()->with('successflly', 'Update by seccessflly');
     }
@@ -48,7 +59,15 @@ class ProduitController extends Controller
         $request->validate([
             'name'=>'required',
         ]);
+        
+        $nnumberitem = $request->session()->get('numberitem_produit_' . $request->name);
+        $prixproduit = $nnumberitem * $request->prix;
+        $prixOrder = $request->session()->get('prixorder');
+        $prixOrder -= $prixproduit;
+        $request->session()->put('prixorder', $prixOrder);
+
         $paniy = $request->session()->get('paniy');
+        
         
         if (Str::contains($paniy, "|produit_".$request->name)) {
             $paniy = Str::remove("|produit_" . $request->name, $paniy);
@@ -62,7 +81,10 @@ class ProduitController extends Controller
             // dd($request->session()->get('paniy'));
             if($request->session()->get('paniy') == "")
             request()->session()->forget('paniy');
-            
+
+            $numberproduit = $request->session()->get('numberproduit') - 1;
+            $request->session()->put('numberproduit', $numberproduit);
+
             return redirect()->route('paniypage');
             // return back()->with('successflly', 'Delete by seccessflly');
         } else {
@@ -79,6 +101,14 @@ class ProduitController extends Controller
             'id'=>'required',
             'name'=>'required',
         ]);
+        if(!$request->session()->has('prixorder')){
+            $request->session()->put('prixorder', 0);
+        }
+        
+        $prixOrder = $nnumberitem * $request->prix;
+        $prixOrder += $request->session()->get('prixorder');
+        $request->session()->put('prixorder', $prixOrder);
+
         $nameproduit = 'produit_' . $request->name;
         $numberitem = 'numberitem_' . $nameproduit;
 
@@ -97,6 +127,9 @@ class ProduitController extends Controller
         $paniy = $paniy . '|' . $nameproduit;
         $paniy = $request->session()->put('paniy', $paniy);
 
+        $numberproduit = $request->session()->get('numberproduit') + 1;
+        $request->session()->put('numberproduit', $numberproduit);
+
         return back()->with('addbygood', 'add to paniy succesfully');
     }
 
@@ -113,7 +146,6 @@ class ProduitController extends Controller
         $produits = Produit::whereIn('id',$arrayId)->get();
         session()->forget('statpaniy');
         return view('visiter.paniy', compact('produits'));
-
     }
 
     public function readAll(){
@@ -152,16 +184,16 @@ class ProduitController extends Controller
 
     public function updateDetai($id){
         $produit = Produit::find($id);
-        return View('updaitp', compact($produit));
+        return View('updaitp', compact('produit'));
     }
 
     public function categoris(){
         return view();
     }
 
-    public function addCategoris(Request $request){
+    public function addCategoris(){
         
-        $product = Produit::find($request->produit_id);
-        $product->catigoris()->attach($request->categoris);
+        $product = Produit::find(12);
+        $product->catigoris()->attach([7, 9, 6]);
     }
 }

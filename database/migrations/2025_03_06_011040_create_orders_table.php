@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('addres_id')->references('id')->on('address')->onDelete('cascade');
             $table->float('prix_order');
             $table->integer('number_items');
-            $table->string('status')->default('enCour');
+            $table->string('status')->default('En Cour');
             $table->timestamps();
         });
         Schema::create('order_produit', function (Blueprint $table) {

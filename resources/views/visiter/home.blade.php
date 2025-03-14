@@ -21,6 +21,7 @@
                         @csrf
                         <input type="hidden"  name="id" value="{{ $produit->id }}">
                         <input type="hidden"  name="name" value="{{ $produit->name }}">
+                        <input type="hidden"  name="prix" value="{{ $produit->prix }}">
                         @if (session()->has('produit_' .  $produit->name))
                             <a href="/produit/deatai/{{ $produit->id }}" class="text-blue-500 hover:text-blue-700 font-semibold">Show More</a>
                         @else

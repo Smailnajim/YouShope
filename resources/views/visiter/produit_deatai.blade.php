@@ -4,7 +4,6 @@
 
 @section('countent')
 
-
 <div class="w-4/5 p-6">
     <div class="grid grid-cols-3 gap-6">
         @if (session()->has('ERROR_GLOBAL'))
@@ -25,6 +24,7 @@
         
                     <input type="hidden" name="_method" id="formthode" value="POST">
                     <input type="hidden"  name="id" value="{{ $produit->id }}">
+                    <input type="hidden"  name="prix" value="{{ $produit->prix }}">
                     <input type="hidden"  name="name" value="{{ $produit->name }}">
                     
                     <div class="hstack gap-3">

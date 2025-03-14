@@ -18,4 +18,8 @@ class UserController extends Controller
         $posts = Produit::all();
         return view('allusers', compact('posts'));
     }
+
+    public function test(){
+        return "ana hna";
+    }
 }
